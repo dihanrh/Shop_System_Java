@@ -22,6 +22,7 @@ class Customer{
     String cusName;
     String cusContact;
     String cusAddrs;
+    
     public Customer(int id, String name, String contact,String address){
         cusID = id;
         cusName = name;
@@ -35,9 +36,10 @@ public class Prod {
 
     public static void main(String[] args) {
         Product Cola = new Product(1,"Coca Cola",20,"A bottle of toxic fluid");
-        Product Kitkat = new Product(2, "Kitkat", 0, "An out of date kitkat completely free for you.");
+        Product Kitkat = new Product(2, "Kitkat", 40, "An out of date kitkat completely free for you.");
         Product Tissue = new Product(3, "Tissue", 25, "A tissue for your sickness");
         
+        double total_pay = 0 ;
         
         Product[] cart={};
         while(true){
@@ -89,6 +91,8 @@ public class Prod {
                                 break;
                             }
                         }
+
+                        total_pay += cart[i].price ; 
                         
                     }
                     break;
@@ -96,14 +100,49 @@ public class Prod {
                 case 2:{
                     System.out.println("Checking cart");
                     System.out.println("Cart Elements:");
-                    System.out.println("______________");
+                    System.out.println("_____________________");
                     for(int i =0;i<cart.length;i++){
-                        System.out.println(cart[i].prodName +"\t"+cart[i].price);
+                        System.out.println(cart[i].prodName +"  \t  "+cart[i].price);
                     }
+                    System.out.println("_____________________");
+                    System.out.println("Total : " + total_pay );
                     break;
                 }
                 case 3:{
+                    if (total_pay > 0.00) 
+                    {
                     System.out.println("Checking Out");
+                    for(int i =0;i<cart.length;i++){
+                        System.out.println(cart[i].prodName +"  \t  "+cart[i].price);
+                    }
+                    System.out.println("_____________________");
+                    System.out.println("Total : " + total_pay );
+
+                    System.out.println("Press 1  for confirmation \nPress 2 for cancel"); 
+                    int Check_out = Integer.parseInt(scan.nextLine()) ;
+                    switch(Check_out)
+                    {
+                        case 1 : {
+                            System.out.println("Order has been palced successfully");
+                            break ;
+                        }
+                        case 2 : {
+                            System.out.println("You have cancel the order");
+
+                            System.exit(0);
+                            break ; 
+                        }
+                        default : {
+                            System.out.println("Invalid! Press 1 or 2  only") ;
+                            break ;
+                        }
+                    }
+                    }
+
+                    else 
+                    {
+                        System.out.println("You have not placed order yet") ;
+                    }
                     break;
                 }
                 default:{
