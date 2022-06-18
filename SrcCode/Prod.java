@@ -1,7 +1,6 @@
-package prod;
+
 
 import java.util.Scanner;
-
 
 class Product{
     int prodID;
@@ -38,16 +37,23 @@ public class Prod {
         Product Cola = new Product(1,"Coca Cola",20,"A bottle of toxic fluid");
         Product Kitkat = new Product(2, "Kitkat", 40, "An out of date kitkat completely free for you.");
         Product Tissue = new Product(3, "Tissue", 25, "A tissue for your sickness");
+        Product Chips = new Product(4,"Chips", 10 , "A bag of Air with Potato") ;
+        Product Pickle = new Product(5, "Pickle", 25, "Eat it to increase gastic pain") ; 
         
         double total_pay = 0 ;
+
+        
         
         Product[] cart={};
+        
         while(true){
+           
             Scanner scan = new Scanner(System.in);
             System.out.println("Welcome to the shop...\nPress 1 to add products");
             System.out.println("Press 2 to check your cart");
             System.out.println("Press 3 to checkout");
             System.out.println("Press 0 to exit the program.");
+
             int input = Integer.parseInt(scan.nextLine());  
             
             switch(input){
@@ -63,6 +69,8 @@ public class Prod {
                     System.out.println("1 for "+Cola.prodName);
                     System.out.println("2 for "+Kitkat.prodName);
                     System.out.println("3 for "+Tissue.prodName);
+                    System.out.println("4 for "+Chips.prodName);
+                    System.out.println("5 for "+Pickle.prodName);
                     
                     cart = new Product[size];
                     
@@ -85,6 +93,16 @@ public class Prod {
                                 System.out.println("Tissue added to the cart");
                                 break;
                             }
+                            case 4:{
+                                cart[i]=Chips;
+                                System.out.println("Chips added to the cart");
+                                break;
+                            }
+                            case 5:{
+                                cart[i]=Pickle;
+                                System.out.println("Pickle added to the cart");
+                                break;
+                            }
                             default:{
                                 i--;
                                 System.out.println("Invalid input");
@@ -94,11 +112,17 @@ public class Prod {
 
                         total_pay += cart[i].price ; 
                         
+
+                       
+                        
                     }
                     break;
                 }
                 case 2:{
+                  
                     System.out.println("Checking cart");
+                   if ( cart.length !=  0 )
+                   {
                     System.out.println("Cart Elements:");
                     System.out.println("_____________________");
                     for(int i =0;i<cart.length;i++){
@@ -106,13 +130,18 @@ public class Prod {
                     }
                     System.out.println("_____________________");
                     System.out.println("Total : " + total_pay );
+                   }
+                   else 
+                   {
+                    System.out.println("Cart is empty");
+                   }
                     break;
                 }
                 case 3:{
                     if (total_pay > 0.00) 
                     {
                     System.out.println("Checking Out");
-                    for(int i =0;i<cart.length;i++){
+                    for(int i =0;i<cart.length ;i++){
                         System.out.println(cart[i].prodName +"  \t  "+cart[i].price);
                     }
                     System.out.println("_____________________");
@@ -124,6 +153,10 @@ public class Prod {
                     {
                         case 1 : {
                             System.out.println("Order has been palced successfully");
+
+                            cart = new Product[0];
+                      
+                           
                             break ;
                         }
                         case 2 : {
